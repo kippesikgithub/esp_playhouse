@@ -1,5 +1,7 @@
 # ESP Playhouse
 Self sustaining Playhouse in the garden for the kids
+![image](https://github.com/kippesikgithub/esp_playhouse/assets/100353268/70c9f181-970a-4c05-aba9-44a7aa264b3a)
+
 ![image](https://user-images.githubusercontent.com/100353268/212083927-91b10d84-f9cb-46bd-950a-75aeb53f92ad.png)
 
 ## Needed Parts
