@@ -12,17 +12,15 @@ logger:
 
 # Enable Home Assistant API
 api:
+  encryption:
+    key: "bxN5m7gR76rBCvB0yKzRomvPxuS3v8uQBh/ZT9i7PIQ="
 
 ota:
+  password: "221f93d93a5b40a36e2e0e27b4e20984"
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "Esp-Speelhuis Fallback Hotspot"
-    password: "wachtwoord"
 
 captive_portal:
 
