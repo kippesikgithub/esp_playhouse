@@ -12,11 +12,8 @@ logger:
 
 # Enable Home Assistant API
 api:
-  encryption:
-    key: "bxN5m7gR76rBCvB0yKzRomvPxuS3v8uQBh/ZT9i7PIQ="
 
 ota:
-  password: "221f93d93a5b40a36e2e0e27b4e20984"
 
 wifi:
   ssid: !secret wifi_ssid
@@ -25,7 +22,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Esp-Speelhuis Fallback Hotspot"
-    password: "CmUk44m5sFcY"
+    password: "xxxxxx"
 
 captive_portal:
 
@@ -81,3 +78,7 @@ light:
     num_leds: 5
     name: "Speelhuis ledstrip"
     id: esp_speelhuis_speelhuis_ledstrip
+
+button:  
+  - platform: restart
+    name: "Restart device"
