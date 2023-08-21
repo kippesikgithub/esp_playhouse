@@ -6,8 +6,8 @@ cards:
     icon: mdi:home-heart
     icon_color: pink
     layout: horizontal
-    entity: light.speelhuis_ledstrip
-    secondary: '{{states(''sensor.buienradar_temperature'') }}°C'
+    entity: sensor.achtertuin_buitentemperatuur
+    secondary: Sophie & Lucas
     tap_action:
       action: navigate
       navigation_path: /lovelace-tablet/speelhuis
@@ -15,7 +15,7 @@ cards:
     horizontal: true
     cards:
       - type: custom:mushroom-template-card
-        entity: light.speelhuis_ledstrip
+        entity: light.esp_speelhuis_speelhuis_ledstrip
         layout: vertical
         icon: |-
           {% if is_state('light.esp_speelhuis_speelhuis_ledstrip', 'on') %}
@@ -28,7 +28,7 @@ cards:
             yellow
           {% endif %}
       - type: custom:mushroom-template-card
-        entity: switch.speelhuis_waterpomp
+        entity: switch.esp_speelhuis_speelhuis_waterpomp
         layout: vertical
         use_light_color: true
         icon: |-
@@ -66,7 +66,7 @@ cards:
                   offsetY: -25
                 total:
                   show: true
-                  label: Thuis Batterij %
+                  label: Thuis Batterij
                   formatter: |
                     EVAL:(w) => {
                       return w.globals.seriesTotals + '%';
@@ -111,18 +111,19 @@ cards:
           {% if is_state(entity, 'on') %}
           mdi:water-pump
           {% else %}
-          mdi:water-pump
+          mdi:water-pump-off
           {% endif %}
         icon_color: |2-
             {% if is_state(entity, 'on') %}
-            green
+            blue
             {% else %}
-            red
+            disabled
             {% endif %}
         entity: switch.speelhuis_waterpomp
         tap_action:
           action: more-info
       - type: template
+        content: '{{states(''sensor.esp_speelhuis_battery_voltage'') }} v'
         entity: sensor.esp_speelhuis_battery_level
         icon: |2
                     {% set bl = states('sensor.esp_speelhuis_battery_level') | int %}
