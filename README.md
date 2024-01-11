@@ -8,7 +8,7 @@ Self sustaining Playhouse in the garden for the kids
 ![image](https://user-images.githubusercontent.com/100353268/212083927-91b10d84-f9cb-46bd-950a-75aeb53f92ad.png)
 
 ## Needed Parts
-- Wemos D1 mini
+- Esp32
 - 5v waterpump
 - ws2812 leds
 - Solar panel
