@@ -1,7 +1,11 @@
 esphome:
   name: esp-speelhuis
   friendly_name: esp-speelhuis
-
+  on_boot:
+    priority: -100.0
+    then:
+      - delay: 1s
+      - script.execute: test_ota
 esp32:
   board: esp32-s2-saola-1
   framework:
@@ -12,17 +16,26 @@ logger:
 
 # Enable Home Assistant API
 api:
+  encryption:
+    key: "bxN5m7gR76rBCvB0yKzRomvPxuS3v8uQBh/ZT9i7PIQ="
 
 ota:
+  password: "221f93d93a5b40a36e2e0e27b4e20984"
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
+  manual_ip:
+    static_ip: 192.168.1.xxx
+    gateway: 192.168.1.xxx
+    subnet: 255.255.255.0
+    dns1: 192.168.1.xxx
+
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Esp-Speelhuis Fallback Hotspot"
-    password: "xxxxxx"
+    password: !wifi_ota_passwd
 
 captive_portal:
 
@@ -79,6 +92,33 @@ light:
     name: "Speelhuis ledstrip"
     id: esp_speelhuis_speelhuis_ledstrip
 
+binary_sensor:
+  - platform: homeassistant
+    id: otamode
+    entity_id: input_boolean.esp_speelhuis_ota_update
+
 button:  
   - platform: restart
     name: "Restart device"
+
+script:
+  - id: test_ota
+    mode: queued
+    then:
+      - logger.log: "Checking OTA Mode"
+      - if:
+          condition:
+            binary_sensor.is_on: otamode
+          then:
+            - logger.log: 'OTA Mode ON'
+            - deep_sleep.prevent: deep_sleep_handler
+          else:
+            - logger.log: 'OTA Mode OFF'
+            - deep_sleep.allow: deep_sleep_handler
+      - delay: 2s
+      - script.execute: test_ota
+
+deep_sleep:
+    id: deep_sleep_handler
+    run_duration: 1min
+    sleep_duration: 14min
